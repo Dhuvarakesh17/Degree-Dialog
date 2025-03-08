@@ -135,12 +135,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+
+
+from dotenv import load_dotenv
 import os
 
-# Initialize environ
-env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+load_dotenv()
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-# Get the API Key
-GEMINI_API_KEY = env("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    raise ValueError("Missing GEMINI_API_KEY in environment variables")
+
 
