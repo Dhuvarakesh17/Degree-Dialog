@@ -3,6 +3,7 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import os
+from fuzzywuzzy import fuzz
 
 # Load API key
 API_KEY = os.getenv("GOOGLE_API_KEY")
@@ -14,14 +15,28 @@ COLLEGE_KEYWORDS = [
     "faculty", "campus", "higher education", "tuition", "student"
 ]
 
+# List of general greetings
+GREETINGS = ["hi", "hello", "hey", "good morning", "good evening", "good afternoon"]
+
+def is_college_related(message):
+    """Check if the message is related to college topics, allowing for minor typos."""
+    for keyword in COLLEGE_KEYWORDS:
+        if fuzz.partial_ratio(keyword, message) > 80:
+            return True
+    return False
+
 @csrf_exempt
 def chatbot_view(request):
     if request.method == "POST":
         data = json.loads(request.body)
         user_message = data.get("message", "").lower()
 
-        # Check if the message contains college-related words
-        if not any(keyword in user_message for keyword in COLLEGE_KEYWORDS):
+        # Handle greetings
+        if any(greet in user_message for greet in GREETINGS):
+            return JsonResponse({"response": "Hello! How can I assist you today?"})
+
+        # Check if the message is college-related
+        if not is_college_related(user_message):
             return JsonResponse({"response": "I'm here to assist with college-related inquiries only."})
 
         try:

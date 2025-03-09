@@ -147,3 +147,4 @@ if not GEMINI_API_KEY:
     raise ValueError("Missing GEMINI_API_KEY in environment variables")
 
 
+

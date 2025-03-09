@@ -48,11 +48,11 @@ const ChatBox = () => {
   };
 
   return (
-    <div className="chatbox-container">
+    <div className="chatbox-container"  >
       <div className="chatbox-header">
-        <h2>Degree Dialog Chatbot</h2>
+        <h2 className="mt-4">Degree Dialog Chatbot</h2>
       </div>
-      <div className="chatbox-messages">
+      <div className="chatbox-messages ">
         {messages.map((msg, index) => (
           <div
             key={index}
