@@ -12,7 +12,7 @@ genai.configure(api_key=API_KEY)
 # List of college-related keywords
 COLLEGE_KEYWORDS = [
     "college", "university", "admission", "degree", "scholarship", "course", 
-    "faculty", "campus", "higher education", "tuition", "student"
+    "faculty", "campus", "higher education", "tuition", "student","institution","institute","IIT","NIT","IIIT","IIM"
 ]
 
 # List of general greetings
