@@ -25,4 +25,4 @@ dist-ssr
 
 
 #env file
-Backend/.env
+./Backend/.env
